@@ -1,0 +1,446 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ParadiseSupermarketChainModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ParadiseSupermarketChainModelStoreContainer">
+          <EntitySet Name="Dates" EntityType="ParadiseSupermarketChainModel.Store.Dates" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Expenses" EntityType="ParadiseSupermarketChainModel.Store.Expenses" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Measurements" EntityType="ParadiseSupermarketChainModel.Store.Measurements" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Products" EntityType="ParadiseSupermarketChainModel.Store.Products" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Sales" EntityType="ParadiseSupermarketChainModel.Store.Sales" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Supermarkets" EntityType="ParadiseSupermarketChainModel.Store.Supermarkets" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="ParadiseSupermarketChainModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Vendors" EntityType="ParadiseSupermarketChainModel.Store.Vendors" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Products_Measurements" Association="ParadiseSupermarketChainModel.Store.FK_Products_Measurements">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Vendors" Association="ParadiseSupermarketChainModel.Store.FK_Products_Vendors">
+            <End Role="Vendors" EntitySet="Vendors" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Dates" Association="ParadiseSupermarketChainModel.Store.FK_Sales_Dates">
+            <End Role="Dates" EntitySet="Dates" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Products1" Association="ParadiseSupermarketChainModel.Store.FK_Sales_Products1">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Supermarkets" Association="ParadiseSupermarketChainModel.Store.FK_Sales_Supermarkets">
+            <End Role="Supermarkets" EntitySet="Supermarkets" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Dates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Expenses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="VendorId" Type="int" Nullable="false" />
+          <Property Name="ExpensesDate" Type="date" Nullable="false" />
+          <Property Name="Expenses" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Measurements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="VendorId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="MeasureId" Type="int" Nullable="false" />
+          <Property Name="BasePrice" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sales">
+          <Key>
+            <PropertyRef Name="SaleId" />
+          </Key>
+          <Property Name="SaleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="DateId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="float" Nullable="false" />
+          <Property Name="SupermarketId" Type="int" Nullable="false" />
+          <Property Name="UnitPrice" Type="money" Nullable="false" />
+          <Property Name="Sum" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Supermarkets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Vendors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Products_Measurements">
+          <End Role="Measurements" Type="ParadiseSupermarketChainModel.Store.Measurements" Multiplicity="1" />
+          <End Role="Products" Type="ParadiseSupermarketChainModel.Store.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="MeasureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Vendors">
+          <End Role="Vendors" Type="ParadiseSupermarketChainModel.Store.Vendors" Multiplicity="1" />
+          <End Role="Products" Type="ParadiseSupermarketChainModel.Store.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="VendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Dates">
+          <End Role="Dates" Type="ParadiseSupermarketChainModel.Store.Dates" Multiplicity="1" />
+          <End Role="Sales" Type="ParadiseSupermarketChainModel.Store.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="DateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Products1">
+          <End Role="Products" Type="ParadiseSupermarketChainModel.Store.Products" Multiplicity="1" />
+          <End Role="Sales" Type="ParadiseSupermarketChainModel.Store.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Supermarkets">
+          <End Role="Supermarkets" Type="ParadiseSupermarketChainModel.Store.Supermarkets" Multiplicity="1" />
+          <End Role="Sales" Type="ParadiseSupermarketChainModel.Store.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supermarkets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="SupermarketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ParadiseSupermarketChainModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ParadiseSupermarketChainEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Dates" EntityType="ParadiseSupermarketChainModel.Dates" />
+          <EntitySet Name="Expenses" EntityType="ParadiseSupermarketChainModel.Expenses" />
+          <EntitySet Name="Measurements" EntityType="ParadiseSupermarketChainModel.Measurements" />
+          <EntitySet Name="Products" EntityType="ParadiseSupermarketChainModel.Products" />
+          <EntitySet Name="Sales" EntityType="ParadiseSupermarketChainModel.Sales" />
+          <EntitySet Name="Supermarkets" EntityType="ParadiseSupermarketChainModel.Supermarkets" />
+          <EntitySet Name="sysdiagrams" EntityType="ParadiseSupermarketChainModel.sysdiagrams" />
+          <EntitySet Name="Vendors" EntityType="ParadiseSupermarketChainModel.Vendors" />
+          <AssociationSet Name="FK_Sales_Dates" Association="ParadiseSupermarketChainModel.FK_Sales_Dates">
+            <End Role="Dates" EntitySet="Dates" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Measurements" Association="ParadiseSupermarketChainModel.FK_Products_Measurements">
+            <End Role="Measurements" EntitySet="Measurements" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Vendors" Association="ParadiseSupermarketChainModel.FK_Products_Vendors">
+            <End Role="Vendors" EntitySet="Vendors" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Products1" Association="ParadiseSupermarketChainModel.FK_Sales_Products1">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Supermarkets" Association="ParadiseSupermarketChainModel.FK_Sales_Supermarkets">
+            <End Role="Supermarkets" EntitySet="Supermarkets" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Dates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Sales" Relationship="ParadiseSupermarketChainModel.FK_Sales_Dates" FromRole="Dates" ToRole="Sales" />
+        </EntityType>
+        <EntityType Name="Expenses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" />
+          <Property Name="ExpensesDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Expenses1" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="Measurements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Products" Relationship="ParadiseSupermarketChainModel.FK_Products_Measurements" FromRole="Measurements" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MeasureId" Type="Int32" Nullable="false" />
+          <Property Name="BasePrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Measurements" Relationship="ParadiseSupermarketChainModel.FK_Products_Measurements" FromRole="Products" ToRole="Measurements" />
+          <NavigationProperty Name="Vendors" Relationship="ParadiseSupermarketChainModel.FK_Products_Vendors" FromRole="Products" ToRole="Vendors" />
+          <NavigationProperty Name="Sales" Relationship="ParadiseSupermarketChainModel.FK_Sales_Products1" FromRole="Products" ToRole="Sales" />
+        </EntityType>
+        <EntityType Name="Sales">
+          <Key>
+            <PropertyRef Name="SaleId" />
+          </Key>
+          <Property Name="SaleId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="DateId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Double" Nullable="false" />
+          <Property Name="SupermarketId" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Sum" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Dates" Relationship="ParadiseSupermarketChainModel.FK_Sales_Dates" FromRole="Sales" ToRole="Dates" />
+          <NavigationProperty Name="Products" Relationship="ParadiseSupermarketChainModel.FK_Sales_Products1" FromRole="Sales" ToRole="Products" />
+          <NavigationProperty Name="Supermarkets" Relationship="ParadiseSupermarketChainModel.FK_Sales_Supermarkets" FromRole="Sales" ToRole="Supermarkets" />
+        </EntityType>
+        <EntityType Name="Supermarkets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Sales" Relationship="ParadiseSupermarketChainModel.FK_Sales_Supermarkets" FromRole="Supermarkets" ToRole="Sales" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Vendors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Products" Relationship="ParadiseSupermarketChainModel.FK_Products_Vendors" FromRole="Vendors" ToRole="Products" />
+        </EntityType>
+        <Association Name="FK_Sales_Dates">
+          <End Role="Dates" Type="ParadiseSupermarketChainModel.Dates" Multiplicity="1" />
+          <End Role="Sales" Type="ParadiseSupermarketChainModel.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="DateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Measurements">
+          <End Role="Measurements" Type="ParadiseSupermarketChainModel.Measurements" Multiplicity="1" />
+          <End Role="Products" Type="ParadiseSupermarketChainModel.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="MeasureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Vendors">
+          <End Role="Vendors" Type="ParadiseSupermarketChainModel.Vendors" Multiplicity="1" />
+          <End Role="Products" Type="ParadiseSupermarketChainModel.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="VendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Products1">
+          <End Role="Products" Type="ParadiseSupermarketChainModel.Products" Multiplicity="1" />
+          <End Role="Sales" Type="ParadiseSupermarketChainModel.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Supermarkets">
+          <End Role="Supermarkets" Type="ParadiseSupermarketChainModel.Supermarkets" Multiplicity="1" />
+          <End Role="Sales" Type="ParadiseSupermarketChainModel.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supermarkets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="SupermarketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ParadiseSupermarketChainModelStoreContainer" CdmEntityContainer="ParadiseSupermarketChainEntities">
+          <EntitySetMapping Name="Dates">
+            <EntityTypeMapping TypeName="ParadiseSupermarketChainModel.Dates">
+              <MappingFragment StoreEntitySet="Dates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Expenses">
+            <EntityTypeMapping TypeName="ParadiseSupermarketChainModel.Expenses">
+              <MappingFragment StoreEntitySet="Expenses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="ExpensesDate" ColumnName="ExpensesDate" />
+                <ScalarProperty Name="Expenses1" ColumnName="Expenses" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Measurements">
+            <EntityTypeMapping TypeName="ParadiseSupermarketChainModel.Measurements">
+              <MappingFragment StoreEntitySet="Measurements">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="ParadiseSupermarketChainModel.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MeasureId" ColumnName="MeasureId" />
+                <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="ParadiseSupermarketChainModel.Sales">
+              <MappingFragment StoreEntitySet="Sales">
+                <ScalarProperty Name="SaleId" ColumnName="SaleId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="DateId" ColumnName="DateId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="SupermarketId" ColumnName="SupermarketId" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supermarkets">
+            <EntityTypeMapping TypeName="ParadiseSupermarketChainModel.Supermarkets">
+              <MappingFragment StoreEntitySet="Supermarkets">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ParadiseSupermarketChainModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vendors">
+            <EntityTypeMapping TypeName="ParadiseSupermarketChainModel.Vendors">
+              <MappingFragment StoreEntitySet="Vendors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

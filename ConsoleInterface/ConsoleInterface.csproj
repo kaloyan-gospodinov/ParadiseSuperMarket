@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ECE21C8A-4644-4D20-BE9A-3FEC2065E711}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ConsoleInterface</RootNamespace>
+    <AssemblyName>ConsoleInterface</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telerik.OpenAccess, Version=2013.2.702.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.OpenAccess.35.Extensions, Version=2013.2.702.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EntityFramework.Data\EntityFramework.Data.csproj">
+      <Project>{67512964-7e84-443c-82a6-aa70bf434938}</Project>
+      <Name>EntityFramework.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExcelAccess\ExcelAccess.csproj">
+      <Project>{5a78605f-cef7-4e2b-aa24-0ba8b9edc044}</Project>
+      <Name>ExcelAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenAccess.Data\OpenAccess.Data.csproj">
+      <Project>{c50145e6-a244-4f1f-b41f-90d1925b4a00}</Project>
+      <Name>OpenAccess.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParadiseSuperMarket.Models\ParadiseSuperMarket.Models.csproj">
+      <Project>{f49f5020-0b93-4121-b1e4-7077510906a7}</Project>
+      <Name>ParadiseSuperMarket.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SQLite\SQLite.csproj">
+      <Project>{2a290904-5dde-4a21-b7a4-507a5d00da43}</Project>
+      <Name>SQLite</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
